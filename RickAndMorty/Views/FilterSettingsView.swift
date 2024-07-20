@@ -19,8 +19,9 @@ struct FilterSettingsView: View {
     @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
-        NavigationView {
-            VStack {
+        ZStack {
+            Color.secondaryColor.ignoresSafeArea(.all)
+            VStack (alignment: .leading, spacing: 24) {
                 Form {
                     Section(header: Text("Status")) {
                         HStack(spacing: 4) {
@@ -64,8 +65,6 @@ struct FilterSettingsView: View {
                         }
                         .padding(3)
                     }
-                    
-                    
                     Button(action: {
                         viewModel.status = selectedStatus
                         viewModel.gender = selectedGender
@@ -73,22 +72,15 @@ struct FilterSettingsView: View {
                         presentationMode.wrappedValue.dismiss() 
                     }, label: {
                         Text("Apply")
-                            .frame(width: 200)
+                            .font(.system(size: 18))
+                            .frame(maxWidth: .infinity, alignment: .center)
                             .padding()
                             .background(Color.accentColor)
                             .foregroundColor(.white)
                             .cornerRadius(16)
                             .bold()
                     })
-
-                    
-                    
                 }
-           
-                
-        
-                
-                
             }
             .navigationBarItems(leading: Button(action: {
                 presentationMode.wrappedValue.dismiss()

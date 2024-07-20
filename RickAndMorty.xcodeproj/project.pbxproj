@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A71CB4C82C4B7FAB00FD2246 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71CB4C72C4B7FAB00FD2246 /* Constants.swift */; };
 		A71D357B2C4816F600F9B03C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A71D357A2C4816F600F9B03C /* Assets.xcassets */; };
 		A73F35992C4B3DB70087D20D /* CharacterDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73F35902C4B3DB70087D20D /* CharacterDetailView.swift */; };
 		A73F359A2C4B3DB70087D20D /* CharacterFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73F35912C4B3DB70087D20D /* CharacterFilterView.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A71CB4C72C4B7FAB00FD2246 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A71D35732C4816F500F9B03C /* RickAndMorty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMorty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A71D357A2C4816F600F9B03C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A73F35902C4B3DB70087D20D /* CharacterDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterDetailView.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				A73F35A52C4B3DC10087D20D /* RickAndMortyApp.swift */,
 				A73F35B62C4B3DE00087D20D /* Launch Screen.storyboard */,
 				A71D357A2C4816F600F9B03C /* Assets.xcassets */,
+				A71CB4C72C4B7FAB00FD2246 /* Constants.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -207,6 +210,7 @@
 				A73F35AE2C4B3DD60087D20D /* CharacterListResponse.swift in Sources */,
 				A73F35A42C4B3DBB0087D20D /* CharacterListViewModel.swift in Sources */,
 				A73F359E2C4B3DB70087D20D /* ErrorView.swift in Sources */,
+				A71CB4C82C4B7FAB00FD2246 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
