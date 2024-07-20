@@ -9,7 +9,6 @@ import SwiftUI
 
 struct CharacterListView: View {
     @StateObject private var viewModel = CharacterListViewModel()
-    @StateObject private var networkMonitor = NetworkMonitor()
     
     @State private var searchText: String = ""
     @State private var selectedStatus: String? = nil
@@ -22,7 +21,7 @@ struct CharacterListView: View {
     var body: some View {
         NavigationView {
             VStack {
-                if networkMonitor.isConnected {
+                if viewModel.isConnected {
                     HStack {
                         TextField("\( Image(systemName: "magnifyingglass"))Search", text: $searchText)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -40,8 +39,6 @@ struct CharacterListView: View {
                         }
                         .padding(.trailing)
                     }
-                
-                    
                     if viewModel.characters.isEmpty && !viewModel.isLoading {
                                                   Image("Group 2")
                                                   .resizable()
@@ -75,7 +72,7 @@ struct CharacterListView: View {
                     }
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
-                                           ToolbarItem(placement: .principal) {
+                        ToolbarItem(placement: .principal) {
                                                Text("Rick & Morty Characters")
                                                    .font(.system(size: 20, weight: .bold))
                                            }
@@ -87,7 +84,7 @@ struct CharacterListView: View {
                     }
                 } else {
                     NoConnectionView {
-                        networkMonitor.checkConnection()
+                        viewModel.fetchCharacters()
                     }
                 }
             }
@@ -100,10 +97,6 @@ struct CharacterListView: View {
                 )
                 .presentationDetents([.medium])
             }
-        }
-       
-        .onAppear {
-            networkMonitor.checkConnection()
         }
     }
 }

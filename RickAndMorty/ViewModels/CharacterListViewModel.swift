@@ -48,6 +48,7 @@ class CharacterListViewModel: ObservableObject {
                 case .success(let newCharacters):
                     self.characters.append(contentsOf: newCharacters)
                     print(self.characters.capacity)
+                    self.isConnected = true
                     if newCharacters.isEmpty {
                         self.noMorePages = true
                     } else {
