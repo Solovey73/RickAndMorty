@@ -10,7 +10,8 @@ import SwiftUI
 struct CharacterDetailView: View {
     @StateObject private var viewModel = CharacterDetailViewModel()
     let characterId: Int
-
+    let nameSpace: Namespace.ID
+    @State var isSource = true
     var body: some View {
         VStack {
             if let character = viewModel.character {
@@ -27,8 +28,14 @@ struct CharacterDetailView: View {
                     .frame(width: 320, height: 320)
                     .cornerRadius(10)
                     .padding(.top, 20)
-                    
-                    
+                    .matchedGeometryEffect(id: "imag",
+                                           in: nameSpace,
+                                           properties: .frame,
+                                           anchor: .top,
+                                           isSource: isSource)
+                    .refreshable {
+                        isSource.toggle()
+                    }
                     statusView(for: character.status)
                         .frame(width: 320, height: 42)
                         .cornerRadius(5)
@@ -65,6 +72,7 @@ struct CharacterDetailView: View {
         .onAppear {
             viewModel.fetchCharacterDetails(id: characterId)
         }
+        .matchedGeometryEffect(id: "image", in: nameSpace)
     }
     
     private func statusView(for status: Status) -> some View {
@@ -93,8 +101,9 @@ struct CharacterDetailView: View {
 }
 
 struct CharacterDetailViewPreviews: PreviewProvider {
+    @Namespace static var nameSpace
     static var previews: some View {
-        CharacterDetailView(characterId: 1)
+        CharacterDetailView(characterId: 1, nameSpace: nameSpace)
     }
 }
 

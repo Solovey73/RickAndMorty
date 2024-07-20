@@ -9,13 +9,14 @@ import SwiftUI
 
 struct CharacterFilterView: View {
     @ObservedObject var viewModel: CharacterListViewModel
+    @Namespace var nameSpace
 
     var body: some View {
         ScrollView {
             LazyVStack {
                 ForEach(viewModel.characters, id: \.id) { character in
-                    NavigationLink(destination: CharacterDetailView(characterId: character.id)) {
-                        TableRow(character: character)
+                    NavigationLink(destination: CharacterDetailView(characterId: character.id, nameSpace: nameSpace)) {
+                        TableRow(character: character, nameSpace: nameSpace)
                     }
                 }
                 

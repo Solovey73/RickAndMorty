@@ -9,7 +9,8 @@ import SwiftUI
 
 struct TableRow: View {
     let character: Character
-   
+    let nameSpace: Namespace.ID
+    var isSource = false
     var body: some View {
         GroupBox {
             HStack {
@@ -18,12 +19,22 @@ struct TableRow: View {
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .clipped()
+                        .matchedGeometryEffect(id: "image",
+                                               in: nameSpace,
+                                               properties: .frame,
+                                               anchor: .center,
+                                               isSource: false)
+                        .animation(.easeIn, value: 5)
+                            
+                        
+                        
                 } placeholder: {
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle(tint: Color.gray))
                 }
                 .frame(width: 64, height: 64)
                 .cornerRadius(10)
+                
 
                 VStack(alignment: .leading) {
                     Text(character.name)
@@ -61,6 +72,10 @@ struct TableRow: View {
         case .unknown:
             return .primary
         }
+    }
+    
+    mutating func isSourceToggle() {
+        isSource.toggle()
     }
 }
 

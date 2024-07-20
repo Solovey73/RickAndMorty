@@ -18,6 +18,7 @@ struct CharacterListView: View {
     
     @State private var showingSettings = false
     
+    @Namespace var nameSpace
     var body: some View {
         NavigationView {
             VStack {
@@ -46,13 +47,20 @@ struct CharacterListView: View {
                                                       .padding()
                                               
                                           }
-                        
                     ScrollView {
                         LazyVStack {
                                 ForEach(viewModel.characters, id: \.id) { character in
-                                    NavigationLink(destination: CharacterDetailView(characterId: character.id)) {
-                                        TableRow(character: character)
+                                    NavigationLink(destination: CharacterDetailView(characterId: character.id, nameSpace: nameSpace)) {
+                                        TableRow(character: character, nameSpace: nameSpace)
+                                            
                                     }
+                                    .scrollTransition { content, phase in
+                                                    content
+                                                        .opacity(phase.isIdentity ? 1 : 0)
+                                                        .scaleEffect(phase.isIdentity ? 1 : 0.75)
+                                                        .blur(radius: phase.isIdentity ? 0 : 10)
+                                                }
+                                    
                                 }
                                 
                                 if viewModel.isLoading {
