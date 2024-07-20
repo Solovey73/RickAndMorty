@@ -83,7 +83,7 @@ struct CharacterListView: View {
                         }
                     }
                 } else {
-                    NoConnectionView {
+                    ErrorView {
                         viewModel.fetchCharacters()
                     }
                 }

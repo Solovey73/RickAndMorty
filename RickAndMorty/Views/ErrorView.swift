@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NoConnectionView: View {
+struct ErrorView: View {
     let retryAction: () -> Void
     
     var body: some View {
@@ -45,6 +45,6 @@ struct NoConnectionView: View {
 
 struct NoConnectionView_Previews: PreviewProvider {
     static var previews: some View {
-        NoConnectionView(retryAction: {})
+        ErrorView(retryAction: {})
     }
 }

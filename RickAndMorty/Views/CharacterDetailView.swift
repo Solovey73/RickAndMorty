@@ -15,10 +15,14 @@ struct CharacterDetailView: View {
         VStack {
             if let character = viewModel.character {
                 VStack {
-                    AsyncImage(url: URL(string: character.image)) {
+                    AsyncImage(url: URL(string: character.image)) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .clipped()
+                    } placeholder: {
                         ProgressView()
-                    } image: { image in
-                        image.resizable()
+                            .progressViewStyle(CircularProgressViewStyle(tint: Color.gray))
                     }
                     .frame(width: 320, height: 320)
                     .cornerRadius(10)

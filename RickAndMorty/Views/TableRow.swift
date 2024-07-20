@@ -13,11 +13,14 @@ struct TableRow: View {
     var body: some View {
         GroupBox {
             HStack {
-                AsyncImage(url: URL(string: character.image)) {
-                    ProgressView()
-                } image: { image in
+                AsyncImage(url: URL(string: character.image)) { image in
                     image
                         .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .clipped()
+                } placeholder: {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: Color.gray))
                 }
                 .frame(width: 64, height: 64)
                 .cornerRadius(10)
