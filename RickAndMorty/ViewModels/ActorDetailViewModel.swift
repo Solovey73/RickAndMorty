@@ -1,5 +1,5 @@
 //
-//  CharacterDetailViewModel.swift
+//  ActorDetailViewModel.swift
 //  RickAndMorty
 //
 //  Created by Вячеслав Круглов on 17.07.2024.
@@ -8,21 +8,21 @@
 import Foundation
 import Combine
 
-class CharacterDetailViewModel: ObservableObject {
-    @Published var character: Character?
+class ActorDetailViewModel: ObservableObject {
+    @Published var actor: Actor?
     @Published var isLoading = false
     @Published var error: Error?
 
     private var cancellables = Set<AnyCancellable>()
 
-    func fetchCharacterDetails(id: Int) {
+    func fetchActorDetails(id: Int) {
         isLoading = true
-        NetworkModelManager.shared.fetchCharacterDetails(id: id) { [weak self] result in
+        NetworkModelManager.shared.fetchActorsDetails(id: id) { [weak self] result in
             DispatchQueue.main.async {
                 self?.isLoading = false
                 switch result {
-                case .success(let character):
-                    self?.character = character
+                case .success(let actor):
+                    self?.actor = actor
                 case .failure(let error):
                     self?.error = error
                 }

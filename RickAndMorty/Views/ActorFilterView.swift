@@ -1,5 +1,5 @@
 //
-//  CharacterFilterView.swift
+//  ActorFilterView.swift
 //  RickAndMorty
 //
 //  Created by Вячеслав Круглов on 19.07.2024.
@@ -7,16 +7,16 @@
 
 import SwiftUI
 
-struct CharacterFilterView: View {
-    @ObservedObject var viewModel: CharacterListViewModel
+struct ActorFilterView: View {
+    @ObservedObject var viewModel: ActorListViewModel
     @Namespace var nameSpace
 
     var body: some View {
         ScrollView {
             LazyVStack {
-                ForEach(viewModel.characters, id: \.id) { character in
-                    NavigationLink(destination: CharacterDetailView(characterId: character.id, nameSpace: nameSpace)) {
-                        TableRow(character: character, nameSpace: nameSpace)
+                ForEach(viewModel.actors, id: \.id) { actor in
+                    NavigationLink(destination: ActorDetailView(actorId: actor.id, nameSpace: nameSpace)) {
+                        TableRow(actor: actor, nameSpace: nameSpace)
                     }
                 }
                 
@@ -31,9 +31,10 @@ struct CharacterFilterView: View {
         }
         .navigationTitle("Filtered Characters")
         .onAppear {
-            if viewModel.characters.isEmpty {
-                viewModel.fetchCharacters(reset: true)
+            if viewModel.actors.isEmpty {
+                viewModel.fetchActors(reset: true)
             }
         }
+        .scrollIndicatorsFlash(onAppear: true)
     }
 }

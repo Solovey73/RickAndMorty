@@ -1,5 +1,5 @@
 //
-//  NetworkService.swift
+//  NetworkModelManager.swift
 //  RickAndMorty
 //
 //  Created by Вячеслав Круглов on 18.07.2024.
@@ -18,10 +18,9 @@ class NetworkModelManager {
     static let shared = NetworkModelManager()
     private let baseURL = "https://rickandmortyapi.com/api"
 
-    func fetchCharacterList(page: Int, name: String? = nil, status: String? = nil, species: String? = nil, type: String? = nil, gender: String? = nil, completion: @escaping (Result<[Character], NetworkError>) -> Void) {
+    func fetchActorList(page: Int, name: String? = nil, status: String? = nil, species: String? = nil, type: String? = nil, gender: String? = nil, completion: @escaping (Result<[Actor], NetworkError>) -> Void) {
         var urlString = "\(baseURL)/character?page=\(page)"
         
-        // Append filters to the URL if provided
         var filters = [String]()
         if let name = name { filters.append("name=\(name)") }
         if let status = status { filters.append("status=\(status)") }
@@ -50,8 +49,8 @@ class NetworkModelManager {
                    errorMessage == "There is nothing here" {
                     completion(.failure(.noMorePages))
                 } else {
-                    let characterListResponse = try JSONDecoder().decode(CharacterListResponse.self, from: data)
-                    completion(.success(characterListResponse.results))
+                    let actorListResponse = try JSONDecoder().decode(ActorListResponse.self, from: data)
+                    completion(.success(actorListResponse.results))
                     print("dataSuccess")
                 }
             } catch {
@@ -61,7 +60,7 @@ class NetworkModelManager {
         }.resume()
     }
     
-    func fetchCharacterDetails(id: Int, completion: @escaping (Result<Character, NetworkError>) -> Void) {
+    func fetchActorsDetails(id: Int, completion: @escaping (Result<Actor, NetworkError>) -> Void) {
         guard let url = URL(string: "\(baseURL)/character/\(id)") else { return }
         
         URLSession.shared.dataTask(with: url) { data, response, error in
@@ -73,8 +72,8 @@ class NetworkModelManager {
             guard let data = data else { return }
             
             do {
-                let character = try JSONDecoder().decode(Character.self, from: data)
-                completion(.success(character))
+                let actor = try JSONDecoder().decode(Actor.self, from: data)
+                completion(.success(actor))
             } catch {
                 completion(.failure(.other(error)))
             }

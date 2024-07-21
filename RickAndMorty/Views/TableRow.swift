@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct TableRow: View {
-    let character: Character
+    let actor: Actor
     let nameSpace: Namespace.ID
     var isSource = false
     var body: some View {
         GroupBox {
             HStack {
-                AsyncImage(url: URL(string: character.image)) { image in
+                AsyncImage(url: URL(string: actor.image)) { image in
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fill)
@@ -37,16 +37,16 @@ struct TableRow: View {
                 
 
                 VStack(alignment: .leading) {
-                    Text(character.name)
+                    Text(actor.name)
                         .font(.headline)
                     HStack {
-                        Text("\(character.status.rawValue)")
-                            .foregroundColor(colorForStatus(character.status))
+                        Text("\(actor.status.rawValue)")
+                            .foregroundColor(colorForStatus(actor.status))
                             .font(.subheadline)
-                        Text("• \(character.species)")
+                        Text("• \(actor.species)")
                             .font(.subheadline)
                     }
-                    Text(character.gender.rawValue)
+                    Text(actor.gender.rawValue)
                         .font(.subheadline)
                     
                 }

@@ -1,5 +1,5 @@
 //
-//  CCharacterListView.swift
+//  ActorListView.swift
 //  RickAndMorty
 //
 //  Created by Вячеслав Круглов on 18.07.2024.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct CharacterListView: View {
-    @StateObject private var viewModel = CharacterListViewModel()
+struct ActorListView: View {
+    @StateObject private var viewModel = ActorListViewModel()
     
     @State private var searchText: String = ""
     @State private var selectedStatus: String? = nil
@@ -40,7 +40,7 @@ struct CharacterListView: View {
                         }
                         .padding(.trailing)
                     }
-                    if viewModel.characters.isEmpty && !viewModel.isLoading {
+                    if viewModel.actors.isEmpty && !viewModel.isLoading {
                                                   Image("Group 2")
                                                   .resizable()
                                                   .scaledToFit()
@@ -49,9 +49,9 @@ struct CharacterListView: View {
                                           }
                     ScrollView {
                         LazyVStack {
-                                ForEach(viewModel.characters, id: \.id) { character in
-                                    NavigationLink(destination: CharacterDetailView(characterId: character.id, nameSpace: nameSpace)) {
-                                        TableRow(character: character, nameSpace: nameSpace)
+                                ForEach(viewModel.actors, id: \.id) { actor in
+                                    NavigationLink(destination: ActorDetailView(actorId: actor.id, nameSpace: nameSpace)) {
+                                        TableRow(actor: actor, nameSpace: nameSpace)
                                             
                                     }
                                     .scrollTransition { content, phase in
@@ -66,13 +66,13 @@ struct CharacterListView: View {
                                 if viewModel.isLoading {
                                     ProgressView()
                                         .padding()
-                                } else if viewModel.noMorePages && !viewModel.characters.isEmpty {
-                                    Text("No more characters")
+                                } else if viewModel.noMorePages && !viewModel.actors.isEmpty {
+                                    Text("No more actors")
                                         .padding()
                                 } else {
                                     Color.clear
                                         .onAppear {
-                                            viewModel.fetchCharacters()
+                                            viewModel.fetchActors()
                                         }
                                 }
                         
@@ -86,13 +86,14 @@ struct CharacterListView: View {
                                            }
                                        }
                     .onAppear {
-                        if viewModel.characters.isEmpty {
-                            viewModel.fetchCharacters()
+                        if viewModel.actors.isEmpty {
+                            viewModel.fetchActors()
                         }
                     }
+                    .scrollIndicatorsFlash(onAppear: true)
                 } else {
                     ErrorView {
-                        viewModel.fetchCharacters()
+                        viewModel.fetchActors()
                     }
                 }
             }
@@ -109,8 +110,8 @@ struct CharacterListView: View {
     }
 }
 
-struct CharacterListView_Previews: PreviewProvider {
+struct ActorListView_Previews: PreviewProvider {
     static var previews: some View {
-        CharacterListView()
+        ActorListView()
     }
 }

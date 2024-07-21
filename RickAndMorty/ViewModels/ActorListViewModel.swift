@@ -1,5 +1,5 @@
 //
-//  CharacterListViewModel.swift
+//  ActorListViewModel.swift
 //  RickAndMorty
 //
 //  Created by Вячеслав Круглов on 18.07.2024.
@@ -8,8 +8,8 @@
 import Combine
 import SwiftUI
 
-class CharacterListViewModel: ObservableObject {
-    @Published var characters = [Character]()
+class ActorListViewModel: ObservableObject {
+    @Published var actors = [Actor]()
     @Published var isLoading = false
     @Published var noMorePages = false
     @Published var isConnected = true
@@ -22,10 +22,10 @@ class CharacterListViewModel: ObservableObject {
     @Published var type: String? = nil
     @Published var gender: String? = nil
 
-    func fetchCharacters(reset: Bool = false) {
+    func fetchActors(reset: Bool = false) {
         if reset {
             currentPage = 1
-            characters.removeAll()
+            actors.removeAll()
             noMorePages = false
         }
         
@@ -33,7 +33,7 @@ class CharacterListViewModel: ObservableObject {
         
         isLoading = true
         
-        NetworkModelManager.shared.fetchCharacterList(
+        NetworkModelManager.shared.fetchActorList(
             page: currentPage,
             name: searchName,
             status: status,
@@ -45,11 +45,11 @@ class CharacterListViewModel: ObservableObject {
                 guard let self = self else { return }
                 self.isLoading = false
                 switch result {
-                case .success(let newCharacters):
-                    self.characters.append(contentsOf: newCharacters)
-                    print(self.characters.capacity)
+                case .success(let newActors):
+                    self.actors.append(contentsOf: newActors)
+                    print(self.actors.capacity)
                     self.isConnected = true
-                    if newCharacters.isEmpty {
+                    if newActors.isEmpty {
                         self.noMorePages = true
                     } else {
                         self.currentPage += 1
@@ -60,16 +60,15 @@ class CharacterListViewModel: ObservableObject {
                         self.noMorePages = true
                     case .other(let error):
                         self.isConnected = false
-                        print("Error fetching characters: \(error.localizedDescription)")
+                        print("Error fetching actors: \(error.localizedDescription)")
                     }
                 }
             }
         }
     }
     
-    
     func search() {
-        fetchCharacters(reset: true)
+        fetchActors(reset: true)
     }
 }
 

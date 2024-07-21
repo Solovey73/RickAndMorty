@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FilterSettingsView: View {
-    @ObservedObject var viewModel: CharacterListViewModel
+    @ObservedObject var viewModel: ActorListViewModel
    
     @Binding var selectedStatus: String?
     @Binding var selectedGender: String?
@@ -102,7 +102,7 @@ struct FilterSettingsView: View {
 struct FilterSettingsView_Previews: PreviewProvider {
     static var previews: some View {
         FilterSettingsView(
-            viewModel: CharacterListViewModel(),
+            viewModel: ActorListViewModel(),
             selectedStatus: .constant(nil),
             selectedGender: .constant(nil)
         )

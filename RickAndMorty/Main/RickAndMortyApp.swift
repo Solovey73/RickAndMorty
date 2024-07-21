@@ -11,7 +11,7 @@ import SwiftUI
 struct RickAndMortiApp: App {
     var body: some Scene {
         WindowGroup {
-            CharacterListView()
+            ActorListView()
                 .preferredColorScheme(.dark)
         }
     }
